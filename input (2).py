@@ -1,13 +1,25 @@
-import pandas as pd
 
-data = {
-    'Post': ['P1', 'P2', 'P3', 'P4', 'P5', 'P6'],
-    'Likes': [100, 200, 100, 300, 200, 100]
-}
+import re
+from collections import Counter
 
-df = pd.DataFrame(data)
+# Customer reviews dataset
+reviews = """
+This product is very good.
+The product quality is good.
+I like this product very much.
+The quality is excellent.
+"""
 
-frequency = df['Likes'].value_counts().sort_index()
+# Convert text into lowercase
+reviews = reviews.lower()
 
-print("Frequency Distribution of Likes:")
-print(frequency)
+# Extract words
+words = re.findall(r'\b\w+\b', reviews)
+
+# Calculate word frequency
+frequency = Counter(words)
+
+# Display the result
+print("Word Frequency Distribution:")
+for word, count in frequency.items():
+    print(word, ":", count)
